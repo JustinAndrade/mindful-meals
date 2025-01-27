@@ -6,6 +6,7 @@ export interface UseAuthReturn {
   user: User | null;
   loading: boolean;
   error: Error | null;
+  initialized: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -16,12 +17,14 @@ export function useAuth(): UseAuthReturn {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     const unsubscribe = authService.subscribeToAuthChanges(
       (user: User | null) => {
         setUser(user);
         setLoading(false);
+        setInitialized(true);
       }
     );
 
@@ -83,6 +86,7 @@ export function useAuth(): UseAuthReturn {
     user,
     loading,
     error,
+    initialized,
     signIn,
     signUp,
     logout,

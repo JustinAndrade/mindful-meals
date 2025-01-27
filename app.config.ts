@@ -23,5 +23,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
+    MONGODB_URI: process.env.MONGODB_URI,
+    MONGODB_DB_NAME: process.env.MONGODB_DB_NAME,
   },
 });

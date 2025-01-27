@@ -79,3 +79,12 @@ export const subscribeToAuthChanges = (
 ) => {
   return onAuthStateChanged(auth, callback);
 };
+
+export default {
+  signUp,
+  signIn,
+  logout,
+  resetPassword,
+  getCurrentUser,
+  subscribeToAuthChanges,
+};

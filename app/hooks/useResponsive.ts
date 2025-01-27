@@ -8,7 +8,7 @@ export const BREAKPOINTS = {
   xl: 1280,
 };
 
-export function useResponsive() {
+export default function useResponsive() {
   const [windowWidth, setWindowWidth] = useState(
     Dimensions.get("window").width
   );

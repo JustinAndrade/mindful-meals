@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack } from "expo-router";
 import { useAuth } from "./hooks/useAuth";
 import LoadingSpinner from "./components/LoadingSpinner";
 import { View } from "react-native";
+import { connectDB } from "./lib/mongodb";
 
 export default function RootLayout() {
-  const { user, loading } = useAuth();
+  const { user, loading, initialized } = useAuth();
 
-  // Only show loading spinner during initial auth check
-  if (loading) {
+  // Initialize MongoDB connection
+  useEffect(() => {
+    connectDB().catch(console.error);
+  }, []);
+
+  // Show loading spinner during initial auth check
+  if (!initialized || loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <LoadingSpinner />
