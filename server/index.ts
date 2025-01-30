@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import profileRoutes from "./routes/profile";
 
 // Load environment variables from .env file
 // if web app, use .env.web
@@ -18,9 +19,11 @@ app.use(
       "http://localhost:8081",
       "exp://localhost:8081",
       "http://localhost:19006",
-      // Add additional origins as needed
-      "exp://192.168.1.1:8081", // Example local network
-      "http://192.168.1.1:8081", // Example local network
+      "http://10.0.0.223:8081",
+      "exp://10.0.0.223:8081",
+      "http://10.0.0.223:19006",
+      "http://10.0.0.223:19000",
+      "exp://10.0.0.223:19000",
     ],
     credentials: true,
   })
@@ -56,22 +59,25 @@ export async function connectDB() {
 connectDB().catch(console.error);
 
 // Health check route
-app.get("/health", (req, res) => {
+app.get("/health", (_req, res) => {
   res.json({ status: "ok", message: "Server is running" });
 });
 
 // API Routes
-app.get("/api", (req, res) => {
+app.get("/api", (_req, res) => {
   res.json({ message: "Welcome to Mindful Meals API" });
 });
+
+// Mount profile routes
+app.use("/api/profile", profileRoutes);
 
 // Error handling middleware
 app.use(
   (
     err: Error,
-    req: express.Request,
+    _req: express.Request,
     res: express.Response,
-    next: express.NextFunction
+    _next: express.NextFunction
   ) => {
     console.error(err.stack);
     res.status(500).json({ error: "Something broke!" });
