@@ -5,21 +5,12 @@ import {
   User,
   onAuthStateChanged,
   sendPasswordResetEmail,
-  browserLocalPersistence,
-  setPersistence,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
 export interface AuthError {
   code: string;
   message: string;
-}
-
-// Set persistence to local
-if (typeof window !== "undefined") {
-  setPersistence(auth, browserLocalPersistence).catch((error) => {
-    console.error("Error setting persistence:", error);
-  });
 }
 
 export const signUp = async (
@@ -80,7 +71,7 @@ export const subscribeToAuthChanges = (
   return onAuthStateChanged(auth, callback);
 };
 
-export default {
+const authService = {
   signUp,
   signIn,
   logout,
@@ -88,3 +79,5 @@ export default {
   getCurrentUser,
   subscribeToAuthChanges,
 };
+
+export default authService;

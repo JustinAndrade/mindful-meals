@@ -14,3 +14,10 @@ declare global {
     interface RootParamList extends AuthStackParamList, TabsStackParamList {}
   }
 }
+
+const navigationTypes = {
+  AuthStackParamList: {} as AuthStackParamList,
+  TabsStackParamList: {} as TabsStackParamList,
+};
+
+export default navigationTypes;

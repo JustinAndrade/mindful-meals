@@ -9,7 +9,13 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "server:build": "tsc -p server/tsconfig.json",
+    "server:start": "node dist/server/index.js",
+    "server:dev": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/index.ts",
+    "dev:web": "concurrently \"npm run server:dev\" \"npm run web\"",
+    "dev:ios": "concurrently \"npm run server:dev\" \"npm run ios\"",
+    "dev:android": "concurrently \"npm run server:dev\" \"npm run android\""
   },
   "jest": {
     "preset": "jest-expo"
@@ -23,6 +29,9 @@
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
     "@types/mongoose": "^5.11.96",
+    "body-parser": "^1.20.3",
+    "buffer": "^6.0.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "expo": "~52.0.27",
     "expo-blur": "~14.0.2",
@@ -36,6 +45,7 @@
     "expo-symbols": "~0.2.1",
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
+    "express": "^4.21.2",
     "firebase": "^11.2.0",
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.5",
@@ -44,6 +54,8 @@
     "react-native": "0.76.6",
     "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "~2.20.2",
+    "react-native-get-random-values": "^1.11.0",
+    "react-native-polyfill-globals": "^3.1.0",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
@@ -52,12 +64,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
+    "concurrently": "^8.2.2",
     "jest": "^29.2.1",
     "jest-expo": "~52.0.3",
+    "nodemon": "^3.1.9",
     "react-test-renderer": "18.3.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "private": true

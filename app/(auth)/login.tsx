@@ -9,7 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useAuth } from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 import AuthInput from "../components/AuthInput";
 import LoadingSpinner from "../components/LoadingSpinner";
 
