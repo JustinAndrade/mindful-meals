@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import profileRoutes from "./routes/profile";
+import ingredientRoutes from "./routes/ingredients";
 
 // Load environment variables from .env file
 // if web app, use .env.web
@@ -68,8 +69,9 @@ app.get("/api", (_req, res) => {
   res.json({ message: "Welcome to Mindful Meals API" });
 });
 
-// Mount profile routes
+// Mount routes
 app.use("/api/profile", profileRoutes);
+app.use("/api/ingredients", ingredientRoutes);
 
 // Error handling middleware
 app.use(
